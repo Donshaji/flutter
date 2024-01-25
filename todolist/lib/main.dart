@@ -16,20 +16,42 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors. orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: home()
+      home: MyHomePage()
     );
   }
 }
 
-class home extends StatelessWidget{
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String text="";
   @override
   Widget build(BuildContext context){
-    return Scaffold(appBar: AppBar(title: Text("hello world")),
-    body: inoutText()
+    return Scaffold(
+      appBar: AppBar(title: Text("hello world")),
+    body: Column(children: <Widget>[inoutText(),Text(this.text)])
     );
   }
 }
 
+class TextInputWiget extends StatefulWidget {
+  Function(String)callback;
+
+  @override
+  State<TextInputWiget> createState() => _TextInputWigetState();
+}
+
+class _TextInputWigetState extends State<TextInputWiget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
 
 class inoutText extends StatefulWidget {
   const inoutText({super.key});
@@ -43,21 +65,13 @@ class _inoutTextState extends State<inoutText> {
   final controller = TextEditingController();
   String text="";
 
-  void dispose(){
-    super.dispose();
-    controller.dispose();
-  }
-
-  void changeText(text){
-    if (text=="Hello"){
-      controller.clear();
-      text="";
-    }
-    setState(() {
+  void changeText(String text){
+    this.setState(() {
       this.text=text;
     });
-    this.text=text;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +82,8 @@ class _inoutTextState extends State<inoutText> {
           labelText: "Type a message:",
           suffixIcon: IconButton(
             icon:Icon(Icons.send),
+            splashColor: Colors.blue,
+            tooltip: "post message",
             onPressed: ()=>{},
             )));
   }
