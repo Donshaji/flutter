@@ -61,14 +61,14 @@ class _inoutTextState extends State<inoutText> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      TextField(
+    return TextField(
         controller: this.controller,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.message),labelText: "Type a message:"),
-        onChanged: (text)=>this.changeText(text),
-      ),Text(text)
-      ],
-        );
+          prefixIcon: Icon(Icons.message),
+          labelText: "Type a message:",
+          suffixIcon: IconButton(
+            icon:Icon(Icons.send),
+            onPressed: ()=>{},
+            )));
   }
 }
