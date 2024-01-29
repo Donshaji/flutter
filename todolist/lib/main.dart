@@ -1,90 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// The main application widget.
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors. orange,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage()
+      title: 'Input Demo',
+      home: InputScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
+// The main screen of the app with input field, button, and display area.
+class InputScreen extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _InputScreenState createState() => _InputScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String text="";
+class _InputScreenState extends State<InputScreen> {
+  // Controller for the text input field.
+  TextEditingController _inputController = TextEditingController();
+  // Variable to store the displayed text.
+  String _displayedText = '';
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("hello world")),
-    body: Column(children: <Widget>[inoutText(),Text(this.text)])
+      appBar: AppBar(
+        title: Text('Input Demo'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // Text input field.
+            TextField(
+              controller: _inputController,
+              decoration: InputDecoration(
+                labelText: 'Enter Text',
+              ),
+            ),
+            SizedBox(height: 20),
+            // Button to trigger printing of input text.
+            ElevatedButton(
+              onPressed: () {
+                // Retrieve the entered text and print it.
+                _displayedText = _inputController.text;
+                print('Entered Text: $_displayedText');
+              },
+              child: Text('Print Input'),
+            ),
+            SizedBox(height: 20),
+            // Display area for the entered text.
+            Text(
+              'Displayed Text: $_displayedText',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+      ),
     );
-  }
-}
-
-class TextInputWiget extends StatefulWidget {
-  Function(String)callback;
-
-  @override
-  State<TextInputWiget> createState() => _TextInputWigetState();
-}
-
-class _TextInputWigetState extends State<TextInputWiget> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
-class inoutText extends StatefulWidget {
-  const inoutText({super.key});
-
-  @override
-  State<inoutText> createState() => _inoutTextState();
-}
-
-
-class _inoutTextState extends State<inoutText> {
-  final controller = TextEditingController();
-  String text="";
-
-  void changeText(String text){
-    this.setState(() {
-      this.text=text;
-    });
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-        controller: this.controller,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.message),
-          labelText: "Type a message:",
-          suffixIcon: IconButton(
-            icon:Icon(Icons.send),
-            splashColor: Colors.blue,
-            tooltip: "post message",
-            onPressed: ()=>{},
-            )));
   }
 }
