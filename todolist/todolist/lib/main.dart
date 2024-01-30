@@ -1,8 +1,16 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp( MaterialApp(
-    home: Scaffold(
+void main() => runApp(const  MaterialApp(
+    home: const Home(),
+  ));
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
         title: const Text("TodoList",
         style: TextStyle(color: Color.fromARGB(255, 3, 34, 50)),),
@@ -13,12 +21,9 @@ void main() => runApp( MaterialApp(
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 130, 175, 211),
-        splashColor:const Color.fromARGB(255, 3, 34, 50),
-        onPressed: ()=>{
-          const TextStyle(color: Color.fromARGB(255, 255, 255, 255))
-        },
+        onPressed: ()=>{},
         child: const Text("click"),
       ),
-    ),
-  ));
-
+    );
+  }
+}
