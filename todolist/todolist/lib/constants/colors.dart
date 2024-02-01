@@ -6,4 +6,4 @@ const Color tdBlue=Colors.blue;
 const Color tdBlack=Colors.black;
 const Color tdGrey=Colors.grey;
 
-const Color tdBGcolor=Color.fromARGB(60, 224, 210, 210);
+const Color tdBGcolor=Color.fromRGBO(248, 233, 233, 1);
